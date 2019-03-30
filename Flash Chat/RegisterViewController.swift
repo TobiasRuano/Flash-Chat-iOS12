@@ -32,12 +32,24 @@ class RegisterViewController: UIViewController {
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (user, error) in
             if error != nil {
                 print(error)
+                self.presentAlert(title: "Unable to register user", description: "Please check that you wrote a valid email. Also, your pasword should have more than 5 characters")
             } else {
                 print("Registration succesfull")
-                SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "goToChat", sender: self)
             }
+            SVProgressHUD.dismiss()
         }
-    } 
+    }
+    
+    func presentAlert(title: String, description: String) {
+        
+        let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+        
+        alertController.addAction(action1)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
 }

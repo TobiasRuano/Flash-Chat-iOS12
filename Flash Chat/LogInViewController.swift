@@ -29,12 +29,12 @@ class LogInViewController: UIViewController {
         Auth.auth().signIn(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (user, error) in
             if error != nil {
                 print(error)
-                self.presentAlert(title: "Wrong password", description: "Please try a new password")
+                self.presentAlert(title: "Wrong password or email", description: "Please try again")
             }else {
                 print("Log in succesfull")
-                SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "goToChat", sender: self)
             }
+            SVProgressHUD.dismiss()
         }
         
     }
